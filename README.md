@@ -3,11 +3,14 @@
 
 This is a node implementation designed to pull relevant data from the Magento 1.x REST API
 
+The Magento 1.x REST API is a little unorthodox in its design and usage. URIs include brackets which can be a little tricky to handle in node (see *Important Note* below).
+
 It is recommended that the developer first review the Magneto 1.x REST API reference at [http://devdocs.magento.com/guides/m1x/api/rest/introduction.html](http://devdocs.magento.com/guides/m1x/api/rest/introduction.html)
 before attempting to utilize this project.
 
 This project utilizes `request-promise-native` to facilitate the paging process I created to return all results for the 
-specified endpoint. Also, you may notice `require('request-debug')(request);` as this provides some helpful runtime debugging.
+specified endpoint. It does not appear that the Magento 1.x REST API has any options for pagination or even indicating
+how many pages of products out of the max limit of 100 exist. Also, you may notice `require('request-debug')(request);` as this provides some helpful runtime debugging.
 
 Most heavy lifting is currently done in `./bin/helpers.js`
 

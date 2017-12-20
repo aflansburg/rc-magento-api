@@ -19,6 +19,7 @@ paginateResponse('products', product_filter)
         if (results){
             let products = mutateObjects(results, 'object');
             writeJSON(products);
+            console.log(`Total products returned: ${Object.keys(products).length}`);
             console.timeEnd('paginateAllProducts');
         }
     })
