@@ -4,7 +4,6 @@ require('request-debug')(request);
 let fs = require('fs');
 const keys = require('./auth/keys.json');
 const apiUrl = require('../settings.json').apiUrl;
-const sizeof = require('object-sizeof');
 const oauth = {
     consumer_key: keys.AUTH_KEY,
     consumer_secret: keys.AUTH_SECRET,

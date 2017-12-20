@@ -26,5 +26,3 @@ paginateResponse('products', product_filter)
     .catch(err => {
     console.log(`Error: ${err}`)
     });
-
-
