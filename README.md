@@ -10,8 +10,30 @@ This project utilizes `request-promise-native` to facilitate the paging process 
 specified endpoint. Also, you may notice `require('request-debug')(request);` as this provides some helpful runtime debugging.
 
 Finally, `node_modules/request/lib/oauth.js` was slightly modified to fix an issue where brackets in URIs were not 
- handled correctly. The change was pulled from [this commit](https://github.com/psyklopz/request/commit/9abf4aaef2febe3f2da027c86ab4e7fe22ec170e) which you can easily implement and properly addresses the bracket parsing issue with the Magento REST API.  
-
+handled correctly. The change was pulled from [this commit](https://github.com/psyklopz/request/commit/9abf4aaef2febe3f2da027c86ab4e7fe22ec170e) which you can easily implement and properly addresses the bracket parsing issue with the Magento REST API. The change is basically to replace this line in `oauth.js`:
+ 
+ ```var params = qsLib.parse([].concat(query, form, qsLib.stringify(oa)).join('&'))```
+ 
+ with:
+ 
+ 
+```
+var param_list = [].concat(query, form, qsLib.stringify(oa)).join('&').split('&');
+    
+var params = {};
+   
+for(var j = 0; j < param_list.length; j++) {
+ 	var p = param_list[j].split("=");
+  	if (p[0] === '') {
+  		//do nothing with this garbage!
+  	} else if(p[1]){
+  		params[decodeURIComponent(p[0])] = decodeURIComponent(p[1]);
+  	} else {
+  		params[decodeURIComponent(p[0])] = "";
+  	}
+}    
+//var params = qsLib.parse([].concat(query, form, qsLib.stringify(oa)).join('&'), {parseArrays: false})
+```
 
 For a quick jumpstart into using this project, store your access oauth tokens in `keys.json` (you will have to create
  this file). Also include the api URL for your rest instance in top-level file `settings.json` - for instance `http://www.yourdomain.com/api/rest/` Instructions on how to obtain your OAuth tokens (or at least how it was done for the purpose of this 
