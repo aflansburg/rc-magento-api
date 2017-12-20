@@ -26,10 +26,10 @@ async function paginateResponse(endpoint, response_filter) {
                 let uri;
 
                 if (response_filter){
-                    uri = apiUrl + `/${endpoint}?limit=100&page=` + curr_page + filter;
+                    uri = apiUrl + `/${endpoint}?limit=100&page=` + curr_page + filter + '/store/1';
                 }
                 else {
-                    uri = apiUrl + `/${endpoint}?limit=100&page=` + curr_page;
+                    uri = apiUrl + `/${endpoint}?limit=100&page=` + curr_page + '/store/1';
                 }
 
                 let req = request.get({
