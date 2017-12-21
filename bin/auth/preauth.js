@@ -1,6 +1,7 @@
 const request = require('request-promise-native');
 const keys = require('./keys.json');
-const siteUrl = 'http://staging.roughcountry.com';
+const siteUrl = require('../../settings.json').apiUrl;
+const base_token_url = require('../../settings.json').base_token_url;
 const authKey = keys.AUTH_KEY;
 const authSecret = keys.AUTH_SECRET;
 
@@ -21,7 +22,7 @@ let oauth_token_response = request.post({
 });
 
 oauth_token_response.then(token_response => {
-    let unauth_token_url = 'https://staging.roughcountry.com/index.php/mgmt/oauth_authorize?' + token_response;
+    let unauth_token_url = base_token_url + token_response;
     console.log(unauth_token_url);
     console.log('Navigate here to authenticate with credentials get the "verifier" token id.');
 }).catch(err => {
