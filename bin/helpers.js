@@ -64,18 +64,30 @@ function mutateObjArray(obj_arr, type){
     // this function assumes the existence of the 'sku' property
     let prodArray = [];
     let mObj = {};
-    for (let i in obj_arr){
-        if (obj_arr.hasOwnProperty(i))
-            for (let k in obj_arr[i]){
-                if (obj_arr[i].hasOwnProperty(k)) {
-                    let sku = obj_arr[i][k]['sku'].toString();
-                    mObj[sku] = obj_arr[i][k];
-                    if (type === 'array')
-                        prodArray.push(mObj);
+    if (type !== 'array') {
+        for (let i in obj_arr) {
+            if (obj_arr.hasOwnProperty(i))
+                for (let k in obj_arr[i]) {
+                    if (obj_arr[i].hasOwnProperty(k)) {
+                        let sku = obj_arr[i][k]['sku'].toString();
+                        mObj[sku] = obj_arr[i][k];
+                    }
+                }
+        }
+    }
+    else {
+        for (let i in obj_arr){
+            if (obj_arr.hasOwnProperty(i)){
+                for (let k in obj_arr[i]){
+                    if (obj_arr[i].hasOwnProperty(k)){
+                        prodArray.push(obj_arr[i][k])
+                    }
                 }
             }
+        }
     }
-    if (type === 'array')
+
+    if (type === 'array' && prodArray.length > 0)
         return prodArray;
     else
         return mObj;

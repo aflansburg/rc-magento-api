@@ -17,9 +17,11 @@ paginateResponse('products', product_filter)
         // can retrieve products in an array
         // or as an object indexed with top-level key being the SKU
         if (results){
-            let products = mutateObjects(results, 'object');
+            let products = mutateObjects(results, 'array');
             writeJSON(products);
             console.log(`Total products returned: ${Object.keys(products).length}`);
+            if (Array.isArray(products))
+                console.log('Products array length: ' + products.length);
             console.timeEnd('paginateAllProducts');
         }
     })

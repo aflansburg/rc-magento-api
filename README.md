@@ -5,7 +5,7 @@ This is a node implementation designed to pull relevant data from the Magento 1.
 
 The Magento 1.x REST API is a little unorthodox in its design and usage. URIs include brackets which can be a little tricky to handle in node (see *Important Note* below).
 
-It is recommended that the developer first review the Magneto 1.x REST API reference at [http://devdocs.magento.com/guides/m1x/api/rest/introduction.html](http://devdocs.magento.com/guides/m1x/api/rest/introduction.html)
+It is recommended that the developer first review the Magento 1.x REST API reference at [http://devdocs.magento.com/guides/m1x/api/rest/introduction.html](http://devdocs.magento.com/guides/m1x/api/rest/introduction.html)
 before attempting to utilize this project.
 
 This project utilizes `request-promise-native` to facilitate the paging process I created to return all results for the 
